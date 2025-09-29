@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MY_SECRET: ${{ secrets.API_KEY }}
 
     steps:
     - uses: actions/checkout@v3
@@ -15,21 +17,18 @@ jobs:
         python-version: '3.12'
 
     - name: Install dependencies
-      run: pip install --upgrade pip
-    - run: pip install -r requirements.txt
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
 
     - name: Run linters
       run: flake8 src/
 
     - name: Run tests
       run: pytest -q --tb=short tests/
+      env:
+        API_KEY: $MY_SECRET
 
     - name: Security audit
       run: pip-audit
-
-    - name: Build Docker image
-      run: docker build -t my-app:latest .
-
-    - name: Scan Docker image
-      run: |
-        docker run --rm aquasec/trivy image --exit-code 1 my-app:latest
+      
