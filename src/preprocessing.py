@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
+
 def fill_missing(df: pd.DataFrame, method: str = "mean") -> pd.DataFrame:
     """Заполняет пропуски (только для числовых столбцов)."""
     df = df.copy()
@@ -12,6 +13,7 @@ def fill_missing(df: pd.DataFrame, method: str = "mean") -> pd.DataFrame:
     else:
         raise ValueError(f"Unknown method: {method}")
     return df
+
 
 def normalize(df: pd.DataFrame) -> pd.DataFrame:
     """Нормализует числовые столбцы в диапазон [0,1]."""
