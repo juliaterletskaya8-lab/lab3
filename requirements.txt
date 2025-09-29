@@ -1,5 +1,6 @@
-pandas
-scikit-learn
-pytest
-flake8
-pip-audit
+pandas==2.3.1
+scikit-learn==1.7.0
+pytest==8.4.2
+flake8==7.3.0
+pip-audit==2.9.0
+jupyterlab==4.4.9
